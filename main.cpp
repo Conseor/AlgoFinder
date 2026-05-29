@@ -99,16 +99,3 @@ int main () {
 
     return 0;
 }
-
-
-
-/*
-
-Basic Idea for Project
-
-- Create a Window using SFML
-- Create a Menu to select which algorithm to visualize
-- Create a way to generate random or specific data to visualize
-- Create a way to step through the algorithm and visualize it
-
-*/
