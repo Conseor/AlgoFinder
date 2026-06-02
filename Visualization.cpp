@@ -14,11 +14,8 @@ Visualization::Visualization(sf::Color nodeColor, sf::Color edgeColor, sf::Color
 void Visualization::draw(sf::RenderWindow& window) {
     // Draw nodes, edges, and visited nodes here using SFML shapes and colors
 
-    // Example: Draw graph space
+    // Draw graph space
     window.draw(graphSpace);
-    sf::CircleShape nodeShape(10); // Example node shape
-    // nodeShape.setFillColor(nodeColor);
-    // nodeShape.setPosition(100, 200); // Example node position
 
     graph.draw(window); // Draw the graph using its own draw method (which should use the nodeColor and edgeColor)
     // window.draw(nodeShape);
@@ -53,9 +50,10 @@ int Visualization::handleEvent(const sf::Event& event) {
                     
                     int nodeId = graph.nodeAtCoordinates(relativeX, relativeY); // Example of checking if a node exists at the clicked position (relative to graph space)
                     if (nodeId == -1 && !edgeCreationMode) {
-                        graph.addNode(relativeX, relativeY); // Example of adding a node at the clicked position (relative to graph space)
+                        graph.addNode(relativeX, relativeY); // Add a node at the clicked position (relative to graph space)
                     } else if (nodeId != -1 && nodeId != graph.getSelectedNodeId() && !edgeCreationMode) { // Check if a node exists and is not already selected
-                        graph.selectNode(nodeId); // Example of selecting the node that was left-clicked (for visualization purposes)
+                        graph.selectNode(nodeId);
+                        graph.getNextEdge(); 
                     } else if (nodeId != -1 && nodeId == graph.getSelectedNodeId() && edgeCreationMode) { // Check if the selected node was left-clicked again while in edge creation mode to cancel edge creation process
                         // cancel edge creation process and deselect
                         edgeCreationMode = false;
@@ -74,6 +72,7 @@ int Visualization::handleEvent(const sf::Event& event) {
                         // graph.selectNode(-1); // Deselect the node after starting edge creation process (for visualization purposes)
                     }
                 } else {
+                    // Left Mouse Clicks outside of the graph space
                 }
             } else if (event.mouseButton.button == sf::Mouse::Right) {
                 int nodeId = graph.nodeAtCoordinates(relativeX, relativeY); // Example of checking if a node exists at the clicked position (relative to graph space)
@@ -91,6 +90,12 @@ int Visualization::handleEvent(const sf::Event& event) {
             } else if (event.key.code == sf::Keyboard::R) {
                 // Handle R key press to reset the graph
                 graph.reset();
+            } else if (event.key.code == sf::Keyboard::Right) {
+                // Change the edge we're looking at in the edge information panel to the next edge (if any)
+                graph.getNextEdge();
+            } else if (event.key.code == sf::Keyboard::Left) {
+                // Change edge we're looking at in the edge information panel to the previous edge (if any)
+                
             }
             break;
         default:

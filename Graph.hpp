@@ -16,9 +16,11 @@ public:
     void draw(sf::RenderWindow& window); // Method to draw the graph using SFML (used by Visualization class)
     int nodeAtCoordinates(int x, int y); // Method to get the node ID at given coordinates (for handling mouse clicks in visualization)
     void reset(); // Method to reset the graph to an empty state (for starting a new visualization)
-    void selectNode(int nodeId) { selectedNodeId = nodeId; } // Method to set the currently selected node (for visualization purposes)
+    void selectNode(int nodeId) { selectedNodeId = nodeId; selectedEdgeToId = -1;} // Method to set the currently selected node (for visualization purposes)
     int getSelectedNodeId() const { return selectedNodeId; } // Method to get the currently selected node ID (for visualization purposes)
     std::pair<int, int> getNodeCoordinates(int nodeId) const { return nodeCoordinates[nodeId]; } // Method to get the coordinates of a node by its ID (for visualization purposes)
+    void getNextEdge();
+    void getPreviousEdge();
 private:
     // Add members for storing graph data
     
@@ -28,7 +30,9 @@ private:
     std::vector<std::pair<int, int>> nodeCoordinates; // Each pair contains the relative x and y coordinates of a node to the graph space
     // std::vector<std::vector<int>> myGraph;
     int selectedNodeId = -1; // To keep track of the currently selected node (for visualization purposes)
+    int selectedEdgeToId = -1; // To keep track of the currently selected edge's destination node ID (for visualization purposes)
     void drawNodeInformation(sf::RenderWindow& window, int nodeId); // Method to draw information about a node (used in visualization when a node is selected)
+    void drawEdgeInformation(sf::RenderWindow& window, int fromId, int toId, float weight); // Method to draw information about an edge (used in visualization when an edge is selected)
     void drawEdge(sf::RenderWindow& window, int fromId, int toId, float weight); // Method to draw an edge between two nodes (used in visualization)
     int xSize; // Size of the graph in the x direction (for visualization purposes)
     int ySize; // Size of the graph in the y direction (for visualization purposes)

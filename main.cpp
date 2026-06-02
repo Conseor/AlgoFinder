@@ -4,16 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include "Menu.hpp"
 #include "Visualization.hpp"
+#include "Colors.hpp"
 
-sf::Color hexToColor(const std::string& hex) {
-    if (hex.size() != 7 || hex[0] != '#') {
-        throw std::invalid_argument("Invalid hex color format");
-    }
-    unsigned int r = std::stoul(hex.substr(1, 2), nullptr, 16);
-    unsigned int g = std::stoul(hex.substr(3, 2), nullptr, 16);
-    unsigned int b = std::stoul(hex.substr(5, 2), nullptr, 16);
-    return sf::Color(r, g, b);
-}
+// sf::Color hexToColor(const std::string& hex) {
+    // if (hex.size() != 7 || hex[0] != '#') {
+        // throw std::invalid_argument("Invalid hex color format");
+    // }
+    // unsigned int r = std::stoul(hex.substr(1, 2), nullptr, 16);
+    // unsigned int g = std::stoul(hex.substr(3, 2), nullptr, 16);
+    // unsigned int b = std::stoul(hex.substr(5, 2), nullptr, 16);
+    // return sf::Color(r, g, b);
+// }
 
 int main () {
     
@@ -37,9 +38,8 @@ int main () {
     #F95738
     */
     
-    sf::Color menuBackgroundColor = hexToColor("#0D3B66");
-    sf::Color visualizationBackgroundColor = hexToColor("#FAF0CA");
-    sf::Color textColor = hexToColor("#FAF0CA");
+    // sf::Color menuBackgroundColor = hexToColor("#0D3B66");
+    sf::Color textColor = Colors::TextColor; 
     
     enum state {MENU, VISUALIZATION};
     state currentState = MENU;
@@ -48,7 +48,7 @@ int main () {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Algorithm Visualizer");
 
     Menu menu = Menu(textColor); // Example of using a hex color for menu text
-    Visualization visualization(hexToColor("#FFD6A5"), hexToColor("#FDFFB6"), hexToColor("#CAFFBF"), hexToColor("#0D3B66"));
+    Visualization visualization(hexToColor("#FFD6A5"), hexToColor("#FDFFB6"), hexToColor("#CAFFBF"), hexToColor("#FAF0CA")); // Example of using hex colors for visualization elements (node color, edge color, visited node color, graph space color)
     
 
     // Main Render Loop
@@ -83,12 +83,12 @@ int main () {
 
         switch(currentState) {
             case MENU:
-                window.clear(menuBackgroundColor);
+                window.clear(Colors::MenuBackgroundColor);
                 menu.draw(window);
                 break;
             case VISUALIZATION:
                 // Draw visualization here
-                window.clear(visualizationBackgroundColor);
+                window.clear(Colors::VisualizationBackgroundColor);
                 visualization.draw(window);
                 break;
         }

@@ -12,8 +12,16 @@ AlgoFinder is a simple project dedicated to showing how different algorithms rel
 ## Implementation Questions
 
 What options do I want for each edge?
-- Non-Directional
-- Directional
-  - Show arrows for directionality within the space
-- Show weights in Graph Space?
-  - Calculate angle for weight to display at?
+- Non-Directional [-]
+- Directional [X]
+  - Show arrows for directionality within the space [X]
+- Show weights in Graph Space? [-]
+  - Calculate angle for weight to display at? [-]
+
+
+
+## Current Issues
+
+Edge Removal
+- May need to change underlying data structure, as edge IDs are changing when nodes are being removed
+  - This interacts with the Adjacency list poorly... Maybe just change the adjacency list? O(n^2) algorithm...

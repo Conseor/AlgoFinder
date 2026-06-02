@@ -2,9 +2,9 @@ CC = g++
 CFLAGS = --std=c++20 -Wall -pedantic -g #-Werror
 LIB = -lsfml-graphics -lsfml-window -lsfml-system
 # Your .hpp files
-DEPS = Menu.hpp Visualization.hpp Graph.hpp
+DEPS = Menu.hpp Visualization.hpp Graph.hpp Colors.hpp
 # Your compiled .o files
-OBJECTS = Menu.o Visualization.o Graph.o
+OBJECTS = Menu.o Visualization.o Graph.o Colors.o
 # The name of your program
 PROGRAM = Algorithm_Visualizer
 # The name of the Library
